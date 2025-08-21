@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load  static %}
+
+
+{% block title %}
+    Landing Page
+{% endblock title %}
+{% block page_style %}
+    <link rel="stylesheet" href="{% static 'landing/landing_style.css' %}">
+{% endblock page_style %}
+
+{% block content %}
+    {% if name == "Nicolas" %}
+        <h1>¡Hola Bro!</h1>   
+        <p>
+        Nombre: {{ name | title }}
+        </p>
+    {% else %}
+        <h1>¡Hola Invitado!</h1>    
+    {% endif %}
+    <p>
+        Edad : {{ age }}
+    </p>
+    <p>
+        Fecha: {{ today | date:"d/m/Y" }}
+    </p>
+        
+    <h2>Stack de Tecnologias</h2>
+    {% include './includes/partial.html' with name=name %}
+    <ul>
+        {% for tool in stack %}
+            <li><a href="{% url 'stack' tool.id %}">{{ tool.name }}</a></li>
+        {% empty %}
+            <li>No hay tecnologias disponibles</li>
+        {% endfor  %}
+    </ul>
+{% endblock content %}
+    
+    
